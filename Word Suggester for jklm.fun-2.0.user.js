@@ -14,7 +14,7 @@
     console.log("Script started.");
 
     // URL to the words list
-    const wordsUrl = "https://raw.githubusercontent.com/yioon97/jklm-fun-bomb-party-suggest/refs/heads/main/5000-more-common.txt?token=GHSAT0AAAAAADAUSPUCT22QGRLWJIJFKS4UZ6YEATQ";
+    const wordsUrl = "https://raw.githubusercontent.com/yioon97/jklm-fun-bomb-party-suggest/refs/heads/main/5000-more-common.txt";
 
     // Create a fixed element to display the suggested words
     const suggestionBox = document.createElement('div');
