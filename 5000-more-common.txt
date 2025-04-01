@@ -6,6 +6,8 @@ coyotes
 yottabyte
 hellscape
 foolscap
+fullback
+albatross
 soundproof
 handprint
 windproof
