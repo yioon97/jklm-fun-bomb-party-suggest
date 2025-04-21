@@ -1,6 +1,7 @@
 roundtrip
 soundtracks
 handtrap
+preoccupied
 chestnut
 augustness
 lastness
@@ -937,6 +938,10 @@ more
 somewhat
 chance
 result
+video
+videocam
+biyearly
+subiya
 residence
 party
 wear
