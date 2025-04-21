@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Word Suggester for jklm.fun
 // @namespace    http://tampermonkey.net/
-// @version      2.0
-// @description  Suggests 10 words containing the letters from the syllable div, prioritizing 5-letter words, and displays them at the top of the page whenever the syllable changes on jklm.fun. Includes a button to remove all generated elements.
+// @version      2.1
+// @description  Suggests 10 words containing the letters from the syllable div, sorted by word length (shortest first), and displays them at the top of the page whenever the syllable changes on jklm.fun. Includes a button to remove all generated elements.
 // @author       You
 // @match        https://*.jklm.fun/*
 // @grant        GM_xmlhttpRequest
@@ -88,7 +88,7 @@
         });
     }
 
-    // Function to suggest 10 words containing the syllable, prioritizing 5-letter words
+    // Function to suggest 10 words containing the syllable, sorted by length (shortest first)
     function suggestWords(words, syllable) {
         console.log(`Suggesting words for syllable: "${syllable}"`);
         // Filter words that contain the syllable as a substring
@@ -102,22 +102,11 @@
             return ["No suggestions found"];
         }
 
-        // Prioritize 5-letter words
-        const fiveLetterWords = validWords.filter(word => word.length === 5);
-        const otherWords = validWords.filter(word => word.length !== 5);
+        // Sort words by length (shortest first)
+        const sortedWords = validWords.sort((a, b) => a.length - b.length);
 
-        // Combine the lists, with 5-letter words first
-        const prioritizedWords = [...fiveLetterWords, ...otherWords];
-
-        // Pick up to 10 random words from the prioritized list
-        const suggestedWords = [];
-        for (let i = 0; i < 10; i++) {
-            if (prioritizedWords.length === 0) break; // Stop if no more words are available
-            const randomIndex = Math.floor(Math.random() * prioritizedWords.length);
-            suggestedWords.push(prioritizedWords[randomIndex]);
-            // Remove the selected word to avoid duplicates
-            prioritizedWords.splice(randomIndex, 1);
-        }
+        // Take the first 10 words (or all available if less than 10)
+        const suggestedWords = sortedWords.slice(0, 10);
 
         console.log(`Suggested words: ${suggestedWords.join(", ")}`);
         return suggestedWords;
